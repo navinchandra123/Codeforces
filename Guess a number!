@@ -1,0 +1,106 @@
+// https://codeforces.com/problemset/problem/416/A
+
+#include<bits/stdc++.h>
+using namespace std;
+#define inf 2000000000
+#define ll long long int
+#define pb push_back
+#define f first
+#define s second
+#define mod 1000000007
+#define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
+void mahakal(){
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	freopen("error.txt","w",stderr);
+	#endif
+}
+
+int main(){
+	mahakal();fast;
+
+	ll t;
+	cin>>t;
+	ll left=-inf , right=inf;
+	bool flag=0;
+	while(t--){
+		string str;
+		ll a;
+		char ch;
+		cin>>str>>a>>ch;
+		// cerr<<str<<" "<<a<<" "<<ch<<endl;
+		if(flag==1){
+			str.clear();
+			continue;
+		}
+		if(str==">"){
+			if(ch=='Y'){
+				if(left<=a){
+					left=a+1;
+				}
+			}
+			else{
+				if(right>a){
+					right=a;
+				}
+			}
+		}
+		else if(str=="<"){
+			if(ch=='N'){
+				if(left<a){
+					left=a;
+				}
+			}
+			else{
+				if(right>=a){
+					right=a-1;
+				}
+			}
+		}
+		else if(str==">="){
+			if(ch=='Y'){
+				if(left<a){
+					left=a;
+				}
+			}
+			else{
+				if(right>a){
+					right=a-1;
+				}
+			}
+		}
+		else{
+			if(ch=='N'){
+				if(left<=a){
+					left=a+1;
+				}
+			}
+			else{
+				if(right>a){
+					right=a;
+				}
+			}
+		}
+		if(left>right){
+			flag=1;
+		}
+		// cerr<<left<<" "<<right<<endl;
+
+	}
+	if(flag){
+		cout<<"Impossible"<<endl;
+	}
+	else{
+		ll mid=min(abs(left),abs(right));
+		if(mid==abs(left)){
+			cout<<left<<endl;
+		}
+		else{
+			cout<<right<<endl;
+		}
+		// cout<<mid<<endl;
+	}
+
+	return 0;
+}
